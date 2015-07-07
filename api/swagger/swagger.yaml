@@ -4,16 +4,16 @@ info:
   title: Simple Post Call with Apigee-127
 # during dev, should point to your local machine
 host: localhost:10010
-# basePath prefixes all resource paths 
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   - http
   - https
 # format of bodies a client can send (Content-Type)
 consumes:
-  - application/x-www-form-urlencoded
+  - application/json
 # format of the responses to the client (Accepts)
 produces:
   - application/json
@@ -29,21 +29,10 @@ paths:
       # used as the method name of the controller
       operationId: createPet
       parameters:
-        - name: id
-          in: formData
-          description: The id of the dog
-          required: false
-          type: string
-        - name: pid
-          in: query
-          description: The cid of the dog
-          required: false
-          type: string  
-        - name: name
-          in: formData
-          description: The name of the dog
-          required: false
-          type: string
+        - name: payload
+          in: body
+          schema:
+            type: object
       responses:
         "200":
           description: Pet Created

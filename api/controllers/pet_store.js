@@ -38,34 +38,15 @@ module.exports = {
  */
 function createPet(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  var petId = req.swagger.params.id.value;
-  var petName = req.swagger.params.name.value;
 
 
-
+  console.log(req.swagger.params.payload.value);
 
   var options = {
     uri: 'http://petstore.swagger.io/v2/pet',
     method: 'POST',
-    json: {
-      "id": petId,
-      "category": {
-        "id": 0,
-        "name": "string"
-      },
-      "name": petName,
-      "photoUrls": [
-        "string"
-      ],
-      "tags": [
-        {
-          "id": 0,
-          "name": "string"
-        }
-      ],
-      "status": "available"
-    }
-  };
+    json: req.swagger.params.payload.value
+  }
 
   request(options, function (error, response, body) {
       var hello = util.format('Hello, Dog created with name : ', body.name);
